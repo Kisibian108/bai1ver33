@@ -1,0 +1,84 @@
+<h3>Form Contact</h3>
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+  <div>
+    <p>
+      <label for="email">Email </label>
+      <input type="text" id="email" name="email" formControlName="email">
+    <p style="color: red" *ngIf="contactForm.controls.email.hasError('required') && contactForm.controls.email.touched">
+      Email ko dc de trong
+    </p>
+    <p style="color: red" *ngIf="contactForm.controls.email.hasError('pattern')">Email phai dung dinh dang
+    </p>
+  </div>
+  <div>
+    <p>
+      <label for="password">Password </label>
+      <input type="text" id="password" name="password" formControlName="password">
+    </p>
+    <p style="color: red"
+       *ngIf="contactForm.controls.password.hasError('required') && contactForm.controls.password.touched">
+      Password ko dc de trong
+    </p>
+    <p style="color: red" *ngIf="contactForm.controls.password.hasError('minlength')">Password phai it nhat 6 ky tu
+    </p>
+  </div>
+
+  <div>
+    <p>
+      <label for="confirmPassword">Confirm Password </label>
+      <input type="text" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword">
+    </p>
+    <p style="color: red"
+       *ngIf="contactForm.controls.confirmPassword.hasError('required') && contactForm.controls.confirmPassword.touched">
+      Confirm Password ko dc de trong
+    </p>
+    <p style="color: red" *ngIf="contactForm.controls.confirmPassword.hasError('minlength')">Confirm Password phai it
+      nhat
+      6 ky tu
+    </p>
+  </div>
+
+  <div>
+    <p>
+      <label for="gender">Gender </label>
+      <input type="radio" value="male" id="gender" name="gender" formControlName="gender"> Male
+      <input type="radio" value="female" id="gender" name="gender" formControlName="gender"> Female
+    </p>
+  </div>
+
+  <div>
+    <p>
+      <label for="country">country </label>
+      <select id="country" name="country" formControlName="country">
+        <option [ngValue]="c.id" *ngFor="let c of countryList">
+          {{c.name}}
+        </option>
+      </select>
+    </p>
+  </div>
+
+  <div>
+    <label for="age">Age </label>
+    <input type="number" id="age" name="age" formControlName="age">
+
+    <p style="color: red" *ngIf="contactForm.controls.age.hasError('required') && contactForm.controls.age.touched">
+      Tuoi ko dc de trong
+    </p>
+    <p style="color: red" *ngIf="contactForm.controls.age.hasError('min')">Tuoi phai lon hon 18
+    </p>
+  </div>
+
+  <div>
+    <label for="phone">Phone </label>
+    <input type="number" id="phone" name="phone" formControlName="phone">
+
+    <p style="color: red" *ngIf="contactForm.controls.phone.hasError('required') && contactForm.controls.phone.touched">
+      So dien thoai ko dc de trong
+    </p>
+    <p style="color: red" *ngIf="contactForm.controls.phone.hasError('pattern') && contactForm.controls.phone.touched">Phone phai dung dinh dang
+    </p>
+  </div>
+  <p>
+    <button type="submit">Submit</button>
+  </p>
+</form>
