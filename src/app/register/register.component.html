@@ -7,7 +7,7 @@
     <p style="color: red" *ngIf="contactForm.controls.email.hasError('required') && contactForm.controls.email.touched">
       Email ko dc de trong
     </p>
-    <p style="color: red" *ngIf="contactForm.controls.email.hasError('pattern')">Email phai dung dinh dang
+    <p style="color: red" *ngIf="contactForm.controls.email.hasError('email')">Email phai dung dinh dang
     </p>
   </div>
   <div>
@@ -36,12 +36,14 @@
       nhat
       6 ky tu
     </p>
+      <p style="color: red" *ngIf="contactForm.hasError('passValid') && contactForm.touched ">password phải đồng bộ với nhau</p>
+
   </div>
 
   <div>
     <p>
       <label for="gender">Gender </label>
-      <input type="radio" value="male" id="gender" name="gender" formControlName="gender"> Male
+      <input type="radio" value="male" id="gender1" name="gender" formControlName="gender"> Male
       <input type="radio" value="female" id="gender" name="gender" formControlName="gender"> Female
     </p>
   </div>

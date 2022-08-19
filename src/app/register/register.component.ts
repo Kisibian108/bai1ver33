@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-register',
@@ -8,7 +8,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   title = 'reactive-form';
   countryList = [
@@ -18,14 +19,26 @@ export class RegisterComponent implements OnInit {
   ];
 
   contactForm = new FormGroup({
-    email: new FormControl('', [Validators.pattern('^\\w+([.-]?\\w+)*@[a-z]+\\.(\\w+){2,}(\\.\\w{2,3})?'),Validators.required]),
+    email: new FormControl('', [Validators.email,Validators.required]),
     gender: new FormControl('', [Validators.required]),
     country: new FormControl('', [Validators.required]),
     age: new FormControl('', [Validators.required,Validators.min(18)]),
     password: new FormControl('', [Validators.required,Validators.minLength(6)]),
     confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    phone: new FormControl('', [Validators.required, Validators.pattern('/^\\+84\\d{9,10}$/')])
-  });
+    phone: new FormControl('', [Validators.required, Validators.pattern('^\\+84\\d{9,10}$')])
+  },  [this.validatePassword]);
+
+  validatePassword(obj: AbstractControl) {
+    // @ts-ignore
+    const password = obj.get('password').value;
+    // @ts-ignore
+    const confirmPassword = obj.get('confirmPassword').value;
+    if (confirmPassword !== password) {
+      return {passValid: true};
+    } else {
+      return null;
+    }
+  }
 
   get email(){
     return this.contactForm.get('email');
@@ -56,5 +69,4 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
